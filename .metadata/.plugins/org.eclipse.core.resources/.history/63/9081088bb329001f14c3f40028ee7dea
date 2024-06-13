@@ -1,0 +1,54 @@
+package lottery;
+import java.util.*;
+
+public class FairLottery {
+	
+
+	    public static void main(String[] args) {
+	        Scanner scanner = new Scanner(System.in);
+
+	        // Read the prizes' values
+	        System.out.println("Enter the comma-separated list of prizes' values:");
+	        String prizesInput = scanner.nextLine();
+	        String[] prizesStr = prizesInput.split(",");
+	        int[] prizes = new int[prizesStr.length];
+	        for (int i = 0; i < prizesStr.length; i++) {
+	            prizes[i] = Integer.parseInt(prizesStr[i]);
+	        }
+
+	        // Read the winners' names
+	        System.out.println("Enter the comma-separated names of winners:");
+	        String winnersInput = scanner.nextLine();
+	        String[] winners = winnersInput.split(",");
+
+	        // Calculate the total value of prizes
+	        int totalPrizeValue = 0;
+	        for (int prize : prizes) {
+	            totalPrizeValue += prize;
+	        }
+
+	        // Sort the prizes in descending order
+	        Arrays.sort(prizes);
+	        int[] distributedPrizes = new int[winners.length];
+
+	        // Distribute the prizes
+	        int winnerIndex = 0;
+	        for (int i = prizes.length - 1; i >= 0; i--) {
+	            distributedPrizes[winnerIndex] += prizes[i];
+	            winnerIndex = (winnerIndex + 1) % winners.length;
+	        }
+
+	        // Print the distribution
+	        for (int i = 0; i < winners.length; i++) {
+	            System.out.print(winners[i] + ":");
+	            System.out.print(distributedPrizes[i]);
+	            if (i < winners.length - 1) {
+	                System.out.print(",");
+	            }
+	        }
+	        System.out.println();
+
+	        scanner.close();
+	    }
+	}
+

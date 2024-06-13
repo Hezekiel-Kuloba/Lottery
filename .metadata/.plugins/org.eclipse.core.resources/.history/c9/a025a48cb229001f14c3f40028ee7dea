@@ -1,0 +1,23 @@
+package lottery;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class FairLottery {
+	public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] prizes = scanner.nextLine().split(",");
+        String[] winners = scanner.nextLine().split(",");
+        int[] prizeValues = new int[prizes.length];
+        for (int i = 0; i < prizes.length; i++) {
+            prizeValues[i] = Integer.parseInt(prizes[i]);
+        }
+        Arrays.sort(prizeValues);
+        for (int i = 0; i < winners.length; i++) {
+            System.out.println(winners[i] + ":");
+            for (int j = i; j < prizeValues.length; j++) {
+                System.out.print(prizeValues[j] + ",");
+            }
+            System.out.println();
+        }
+    }
+}

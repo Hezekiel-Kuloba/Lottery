@@ -1,0 +1,44 @@
+package lottery;
+import java.util.*;
+
+public class FairLottery {
+	
+
+	    public static void main(String[] args) {
+	    	        Scanner scanner = new Scanner(System.in);
+
+	    	        System.out.println("Enter names separated by commas:");
+	    	        String namesInput = scanner.nextLine();
+	    	        String[] names = namesInput.split(",");
+
+	    	        System.out.println("Enter values separated by commas:");
+	    	        String valuesInput = scanner.nextLine();
+	    	        String[] values = valuesInput.split(",");
+
+	    	        if (names.length != values.length) {
+	    	            System.out.println("Error: Number of names and values must match.");
+	    	            return;
+	    	        }
+
+	    	        // Create a map to store names and their corresponding values
+	    	        Map<String, List<Integer>> nameValueMap = new HashMap<>();
+
+	    	        for (int i = 0; i < names.length; i++) {
+	    	            String name = names[i];
+	    	            int value = Integer.parseInt(values[i]);
+
+	    	            nameValueMap.computeIfAbsent(name, k -> new ArrayList<>()).add(value);
+	    	        }
+
+	    	        // Print the output
+	    	        for (String name : nameValueMap.keySet()) {
+	    	            List<Integer> nameValues = nameValueMap.get(name);
+	    	            System.out.print(name + ":");
+	    	            for (int val : nameValues) {
+	    	                System.out.print(val + ",");
+	    	            }
+	    	            System.out.println();
+	    	        }
+	    }
+	}
+

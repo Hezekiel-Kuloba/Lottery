@@ -1,0 +1,49 @@
+package lottery;
+import java.util.*;
+
+public class FairLottery {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Take the prices as input
+        System.out.println("Enter the prices separated by commas:");
+        String pricesInput = scanner.nextLine();
+        List<Integer> prices = new ArrayList<>();
+        for (String price : pricesInput.split(",")) {
+            prices.add(Integer.parseInt(price.trim()));
+        }
+
+        // Take the names as input
+        System.out.println("Enter the names separated by commas:");
+        String namesInput = scanner.nextLine();
+        List<String> names = Arrays.asList(namesInput.split(","));
+
+        distributePrices(prices, names);
+    }
+
+    public static void distributePrices(List<Integer> prices, List<String> names) {
+        // Create a map to store the distribution
+        Map<String, List<Integer>> distribution = new HashMap<>();
+
+        // Initialize the map
+        for (String name : names) {
+            distribution.put(name, new ArrayList<>());
+        }
+
+        // Sort the prices in descending order
+        Collections.sort(prices, Collections.reverseOrder());
+
+        // Distribute the prices
+        int i = 0;
+        for (int price : prices) {
+            String name = names.get(i % names.size());
+            distribution.get(name).add(price);
+            i++;
+        }
+
+        // Print the distribution
+        for (Map.Entry<String, List<Integer>> entry : distribution.entrySet()) {
+            System.out.println(entry.getKey() + ":" + entry.getValue().toString().replaceAll("[\\[\\] ]", ""));
+        }
+    }
+}

@@ -1,0 +1,42 @@
+package lottery;
+import java.util.*;
+
+public class FairLottery {
+	
+
+	    public static void main(String[] args) {
+	        // Example inputs
+	        String prizesInput = "100,800,200,500,400,1000";
+	        String winnersInput = "Joshua,Mahesh,Lilian";
+
+	        List<String> prizes = Arrays.asList(prizesInput.split(","));
+	        List<String> winners = Arrays.asList(winnersInput.split(","));
+
+	        System.out.println(fairDistribution(prizes, winners));
+	    }
+
+	    private static Map<String, Integer> fairDistribution(List<String> prizes, List<String> winners) {
+	        Collections.sort(prizes);
+	        Collections.reverse(prizes);
+
+	        Map<String, Integer> allocation = new HashMap<>();
+	        int index = 0;
+
+	        for (String winner : winners) {
+	            allocation.put(winner, 0); // Initialize with 0
+	        }
+
+	        while (!prizes.isEmpty()) {
+	            for (Map.Entry<String, Integer> entry : allocation.entrySet()) {
+	                if (entry.getValue() == 0 &&!prizes.isEmpty()) { // Check if winner hasn't received anything yet
+	                    allocation.put(entry.getKey(), prizes.remove(index)); // Assign the prize
+	                    break; // Move to the next iteration after assigning a prize
+	                }
+	            }
+	            index++; // Increment index to ensure different prizes are assigned
+	        }
+
+	        return allocation;
+	    }
+	}
+

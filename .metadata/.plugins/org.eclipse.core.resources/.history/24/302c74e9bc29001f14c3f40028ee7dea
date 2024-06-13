@@ -1,0 +1,39 @@
+package lottery;
+import java.util.*;
+
+public class FairLottery {
+	
+
+	    public static void main(String[] args) {
+	    	        Scanner scanner = new Scanner(System.in);
+	    	        Map<String, List<Integer>> map = new HashMap<>();
+	    	        List<Integer> numbers = new ArrayList<>();
+
+	    	        System.out.println("Enter numbers separated by commas:");
+	    	        String[] inputNumbers = scanner.nextLine().split(",");
+	    	        for (String number : inputNumbers) {
+	    	            int num = Integer.parseInt(number);
+	    	            numbers.add(num);
+	    	        }
+
+	    	        System.out.println("Enter names separated by commas:");
+	    	        String[] inputNames = scanner.nextLine().split(",");
+
+	    	        Collections.sort(numbers);
+
+	    	        for (int i = 0; i < inputNames.length; i++) {
+	    	            if (map.containsKey(inputNames[i])) {
+	    	                map.get(inputNames[i]).add(numbers.get(i));
+	    	            } else {
+	    	                List<Integer> list = new ArrayList<>();
+	    	                list.add(numbers.get(i));
+	    	                map.put(inputNames[i], list);
+	    	            }
+	    	        }
+
+	    	        for (Map.Entry<String, List<Integer>> entry : map.entrySet()) {
+	    	            System.out.println(entry.getKey() + ":" + entry.getValue());
+	    	        }
+	    	    }
+	}
+

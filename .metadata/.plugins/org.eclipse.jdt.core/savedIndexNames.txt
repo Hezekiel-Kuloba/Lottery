@@ -1,0 +1,4 @@
+INDEX VERSION 1.134+C:\Users\Kuloba\eclipse-workspace\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index
+2529104161.index
+2405511553.index
